@@ -26,6 +26,11 @@ app.get("/squadre", (req, res)=>{
 });
 
 //4. elenco nazioni
+app.get("/nazioni", (req, res)=>{
+    let nazioni = [...new Set(giocatori.map((n)=>n.Nazionalita))];
+    res.status(200).end(JSON.stringify(nazioni));
+});
+
 //5. elenco posizioni
 //6. scheda giocatore
 //7. top 10 portieri
