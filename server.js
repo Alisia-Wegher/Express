@@ -80,6 +80,13 @@ app.get("/valoreTop15/:club", (req, res) =>{
 });
 
 //10. Elenco dei giocatori di un certo ruolo in ordine di valore crescente
+app.get("/:ruolo", (req, res) =>{
+    let ruoloGiocatore = req.params.ruolo;
+    let giocatoriFiltered = giocatori.filter((g)=>{return g.Ruolo.includes(ruoloGiocatore)});
+    let giocatoriOrdered = giocatoriFiltered.sort(giocatoriFiltered.Valore);
+    res.status(200).end(JSON.stringify(giocatoriOrdered));
+});
+
 //11. I 10 giocatori più forti di una data nazione
 //12. La percentuale di attaccanti che usano di preferenza il piede sinistro
 //13. Aumentare l'età di tutti i giocatori di un anno
