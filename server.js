@@ -20,7 +20,10 @@ app.get("/giocatori/:club", (req, res)=>{
 });
 
 //3. elenco squadre
-
+app.get("/squadre", (req, res)=>{
+    let squadre = [...new Set(giocatori.map((c)=>c.Club))];
+    res.status(200).end(JSON.stringify(squadre));
+});
 
 //4. elenco nazioni
 //5. elenco posizioni
