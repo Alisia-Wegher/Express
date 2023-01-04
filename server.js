@@ -2,16 +2,26 @@ const express = require('express');
 const app = express();
 const fs = require("fs");
 let fileJsonRaw = fs.readFileSync("fifa23.json", "utf8");
-let fileJson = [];
+let giocatori = [];
 
-fileJson = JSON.parse(fileJsonRaw);
+giocatori = JSON.parse(fileJsonRaw);
 
 //1. elenco giocatori
-app.get("/", (req, res) => {
-    res.status(200).end(JSON.stringify(fileJson));
+app.get("/giocatori", (req, res) => {
+    res.status(200).end(JSON.stringify(giocatori));
 });
+
 //2. elenco giocatori di squadra
+app.get("/giocatori/:club", (req, res)=>{
+    let squadra = req.params.club;
+    let giocatoriFiltered = giocatori.filter((g)=>{return g.Club.includes(squadra)});
+    res.status(200).end(JSON.stringify(giocatoriFiltered));
+    console.log(squadra);
+});
+
 //3. elenco squadre
+
+
 //4. elenco nazioni
 //5. elenco posizioni
 //6. scheda giocatore
