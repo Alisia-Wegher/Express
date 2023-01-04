@@ -88,6 +88,13 @@ app.get("/:ruolo", (req, res) =>{
 });
 
 //11. I 10 giocatori più forti di una data nazione
+app.get("/top10/:nazione", (req, res) => {
+    let naziGiocatore = req.params.nazione;
+    let giocatoriFiltered = giocatori.filter((g)=>{return g.Nazionalita.includes(naziGiocatore)});
+    let giocatoriOrdered = giocatoriFiltered.sort(giocatoriFiltered.Valore);
+    res.status(200).end(JSON.stringify(giocatoriOrdered.slice(0, 10)));
+});
+
 //12. La percentuale di attaccanti che usano di preferenza il piede sinistro
 //13. Aumentare l'età di tutti i giocatori di un anno
 //14. Eliminazione di tutti i giocatori di valore inferiore a 78
