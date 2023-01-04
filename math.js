@@ -1,0 +1,3 @@
+function media(max, somma){
+    
+}

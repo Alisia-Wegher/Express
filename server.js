@@ -1,3 +1,4 @@
+//const math = require("math.js");
 const express = require('express');
 const app = express();
 const fs = require("fs");
@@ -44,13 +45,25 @@ app.get("/giocatori/scheda/:id", (req, res)=>{
 });
 
 //7. top 10 portieri
-app.get('/portieri', (req, res) => {
+app.get("/top10portieri", (req, res) => {
     let giocatoriFiltered = giocatori.filter((g)=>{return g.Ruolo.includes("P")});
     let giocatoriOrdered = giocatoriFiltered.sort(giocatoriFiltered.Valore);
     res.status(200).end(JSON.stringify(giocatoriOrdered.slice(0, 10)));
 });
 
 //8. età media dei migliori 15 giocatori di una data squadra
+app.get("/etaTop15/:club", (req, res) =>{
+    let maxValue = 15;
+    var somma = 0;
+    let clubGiocatore = req.params.club;
+    let giocatoriFiltered = giocatori.filter((g)=>{return g.Club.includes(clubGiocatore)});
+    let giocatoriOrdered = giocatoriFiltered.sort(giocatoriFiltered.Eta);
+    let giocatoriSliced = giocatoriOrdered.slice(0, maxValue);
+    giocatoriSliced.forEach(element => {somma = somma + element.Eta;});
+    let etaMedia = somma/maxValue;
+    res.status(200).end('' + etaMedia);
+});
+
 //9. Valore medio dei migliori 15 giocatori di una data squadra
 //10. Elenco dei giocatori di un certo ruolo in ordine di valore crescente
 //11. I 10 giocatori più forti di una data nazione
