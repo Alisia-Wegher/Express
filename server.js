@@ -32,7 +32,13 @@ app.get("/nazioni", (req, res)=>{
 });
 
 //5. elenco posizioni
+app.get("/posizioni", (req, res)=>{
+    let posizioni = [...new Set(giocatori.map((p)=>p.Posizione))];
+    res.status(200).end(JSON.stringify(posizioni));
+});
+
 //6. scheda giocatore
+
 //7. top 10 portieri
 //8. età media dei migliori 15 giocatori di una data squadra
 //9. Valore medio dei migliori 15 giocatori di una data squadra
