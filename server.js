@@ -40,11 +40,15 @@ app.get("/posizioni", (req, res)=>{
 app.get("/giocatori/scheda/:id", (req, res)=>{
     let idGiocatore = req.params.id;
     let giocatoriFiltered = giocatori.filter((g)=>{return g.id==idGiocatore});
-    console.log(idGiocatore);
     res.status(200).end(JSON.stringify(giocatoriFiltered));
 });
 
 //7. top 10 portieri
+app.get('/portieri', (req, res) => {
+    let giocatoriFiltered = giocatori.filter((g)=>{return g.Ruolo.includes("P")});
+    let giocatoriOrdered = giocatoriFiltered.sort(giocatoriFiltered.Valore);
+    res.status(200).end(JSON.stringify(giocatoriOrdered.slice(0, 10)));
+});
 
 //8. età media dei migliori 15 giocatori di una data squadra
 //9. Valore medio dei migliori 15 giocatori di una data squadra
