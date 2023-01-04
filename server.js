@@ -7,6 +7,9 @@ let fileJson = [];
 fileJson = JSON.parse(fileJsonRaw);
 
 //1. elenco giocatori
+app.get("/", (req, res) => {
+    res.status(200).end(JSON.stringify(fileJson));
+});
 //2. elenco giocatori di squadra
 //3. elenco squadre
 //4. elenco nazioni
@@ -22,3 +25,5 @@ fileJson = JSON.parse(fileJsonRaw);
 //14. Eliminazione di tutti i giocatori di valore inferiore a 78
 //15. Inserimento di un nuovo giocatore
 //16. Prevedere una pagina iniziale ed una risposta di default
+
+app.listen(5000, () => console.log("sono in ascolto sulla porta 5000"));
