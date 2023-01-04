@@ -61,10 +61,24 @@ app.get("/etaTop15/:club", (req, res) =>{
     let giocatoriSliced = giocatoriOrdered.slice(0, maxValue);
     giocatoriSliced.forEach(element => {somma = somma + element.Eta;});
     let etaMedia = somma/maxValue;
-    res.status(200).end('' + etaMedia);
+    let valoreRounded = Math.round(etaMedia);
+    res.status(200).end(valoreRounded.toString());
 });
 
 //9. Valore medio dei migliori 15 giocatori di una data squadra
+app.get("/valoreTop15/:club", (req, res) =>{
+    let maxValue = 15;
+    var somma = 0;
+    let clubGiocatore = req.params.club;
+    let giocatoriFiltered = giocatori.filter((g)=>{return g.Club.includes(clubGiocatore)});
+    let giocatoriOrdered = giocatoriFiltered.sort(giocatoriFiltered.Valore);
+    let giocatoriSliced = giocatoriOrdered.slice(0, maxValue);
+    giocatoriSliced.forEach(element => {somma = somma + element.Valore;});
+    let etaMedia = somma/maxValue;
+    let valoreRounded = Math.round(etaMedia);
+    res.status(200).end(valoreRounded.toString());
+});
+
 //10. Elenco dei giocatori di un certo ruolo in ordine di valore crescente
 //11. I 10 giocatori più forti di una data nazione
 //12. La percentuale di attaccanti che usano di preferenza il piede sinistro
