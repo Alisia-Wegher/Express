@@ -133,6 +133,29 @@ app.get("/giocatoriBravi", (req, res)=>{
 });
 
 //15. Inserimento di un nuovo giocatore
-//16. Prevedere una pagina iniziale ed una risposta di default
+app.get("/newPlayer", (req, res)=>{
+    let nome = "Alisia Wegher";
+    let valore= 4269;
+    let posizione = "CAM";
+    let nazionalita = "Italia";
+    let eta = 18;
+    let club = "Sixtynoice";
+    let piede = "Left";
+    let ruolo = "P";
+    let Id = 1406;
+    let newPlayers = { 
+        Nome: nome,  
+        Valore: valore, 
+        Posizione: posizione, 
+        Nazionalita: nazionalita, 
+        Eta: eta, 
+        Club: club, 
+        Piede: piede, 
+        Ruolo: ruolo, 
+        id: Id
+    };
+    giocatori.push(newPlayers);
+    res.status(200).end(JSON.stringify(giocatori));
+});
 
 app.listen(5000, () => console.log("sono in ascolto sulla porta 5000"));
