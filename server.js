@@ -80,7 +80,7 @@ app.get("/valoreTop15/:club", (req, res) =>{
 });
 
 //10. Elenco dei giocatori di un certo ruolo in ordine di valore crescente
-app.get("/:ruolo", (req, res) =>{
+app.get("/ruoli/:ruolo", (req, res) =>{
     let ruoloGiocatore = req.params.ruolo;
     let giocatoriFiltered = giocatori.filter((g)=>{return g.Ruolo.includes(ruoloGiocatore)});
     let giocatoriOrdered = giocatoriFiltered.sort(giocatoriFiltered.Valore);
@@ -96,6 +96,19 @@ app.get("/top10/:nazione", (req, res) => {
 });
 
 //12. La percentuale di attaccanti che usano di preferenza il piede sinistro
+app.get("/piedi", (req, res)=>{
+    var somma = 0;
+    let giocatoriFiltered = giocatori.filter((g)=>{return g.Ruolo.includes("A")});
+    giocatoriFiltered.forEach(element => {
+        if (element.Piede == "Left") {
+            somma++;
+        }
+    });
+    let percentuale = Math.round((somma/giocatoriFiltered.length)*100);
+    //console.log(somma, giocatoriFiltered.length, percentuale);
+    res.status(200).end(percentuale.toString() + "%");
+});
+
 //13. Aumentare l'età di tutti i giocatori di un anno
 //14. Eliminazione di tutti i giocatori di valore inferiore a 78
 //15. Inserimento di un nuovo giocatore
