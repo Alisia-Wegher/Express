@@ -119,6 +119,18 @@ app.get("/giocatoriVecchi", (req, res)=>{
 });
 
 //14. Eliminazione di tutti i giocatori di valore inferiore a 78
+app.get("/giocatoriBravi", (req, res)=>{
+    let newGiocatori = [...new Set(giocatori.map((c)=>c))];
+    let giocatori2 = [];
+
+    newGiocatori.forEach(element => {
+        if(element.Valore >= 78){
+            giocatori2.push(element);
+        }
+    });
+
+    res.status(200).end(JSON.stringify(giocatori2));
+});
 
 //15. Inserimento di un nuovo giocatore
 //16. Prevedere una pagina iniziale ed una risposta di default
