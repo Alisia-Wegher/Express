@@ -1,4 +1,5 @@
 //const math = require("math.js");
+const { json } = require('express');
 const express = require('express');
 const app = express();
 const fs = require("fs");
@@ -110,7 +111,15 @@ app.get("/piedi", (req, res)=>{
 });
 
 //13. Aumentare l'età di tutti i giocatori di un anno
+app.get("/giocatoriVecchi", (req, res)=>{
+    giocatori.forEach(element =>{
+        element.Eta++;
+    });
+    res.status(200).end(JSON.stringify(giocatori));
+});
+
 //14. Eliminazione di tutti i giocatori di valore inferiore a 78
+
 //15. Inserimento di un nuovo giocatore
 //16. Prevedere una pagina iniziale ed una risposta di default
 
